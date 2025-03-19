@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1200.0" style="-fx-background-color: #aba8a6;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.project.projectapp.viewController.ProjectViewController">
+   <children>
+      <Label fx:id="lbl_projectMenu" layoutX="424.0" layoutY="24.0" text="Project Menu" textFill="#434343">
+         <font>
+            <Font name="Calibri Bold" size="64.0" />
+         </font>
+      </Label>
+      <Label fx:id="lb_id" layoutX="677.0" layoutY="136.0" text="Id:" textFill="#434343">
+         <font>
+            <Font name="Verdana Bold" size="36.0" />
+         </font>
+      </Label>
+      <Label fx:id="lb_name" layoutX="218.0" layoutY="136.0" text="Name:" textFill="#434343">
+         <font>
+            <Font name="Verdana Bold" size="36.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tbl_1" layoutX="138.0" layoutY="344.0" prefHeight="263.0" prefWidth="656.0" style="-fx-border-color: #434343; -fx-border-width: 2; -fx-font-size: 24px;">
+         <columns>
+            <TableColumn fx:id="cl_name" prefWidth="358.0" text="Name" />
+            <TableColumn fx:id="cl_id" prefWidth="293.0" text="Id" />
+         </columns>
+      </TableView>
+      <Button fx:id="bt_addProject" layoutX="303.0" layoutY="229.0" mnemonicParsing="false" onAction="#onAddProject" style="-fx-background-color: #8f8b89; -fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: #434343; -fx-border-width: 2;" text="Add Project" textFill="#434343">
+         <font>
+            <Font name="Calibri Bold" size="30.0" />
+         </font>
+      </Button>
+      <Button fx:id="bt_updateProject" layoutX="521.0" layoutY="229.0" mnemonicParsing="false" onAction="#onUpdateProject" style="-fx-background-color: #8f8b89; -fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: #434343; -fx-border-width: 2;" text="Update Project" textFill="#434343">
+         <font>
+            <Font name="Calibri Bold" size="30.0" />
+         </font>
+      </Button>
+      <Button fx:id="bt_deleteProject" layoutX="840.0" layoutY="446.0" mnemonicParsing="false" onAction="#onDeleteProject" style="-fx-background-color: #8f8b89; -fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: #434343; -fx-border-width: 2;" text="Delete Project" textFill="#434343">
+         <font>
+            <Font name="Calibri Bold" size="30.0" />
+         </font>
+      </Button>
+      <Button fx:id="bt_clean" layoutX="784.0" layoutY="229.0" mnemonicParsing="false" onAction="#onClean" style="-fx-background-color: #8f8b89; -fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: #434343; -fx-border-width: 2;" text="Clean" textFill="#434343">
+         <font>
+            <Font name="Calibri Bold" size="30.0" />
+         </font>
+      </Button>
+      <TextField fx:id="txt_name" layoutX="364.0" layoutY="134.0" prefHeight="48.0" prefWidth="240.0" style="-fx-background-color: #bcb4b0; -fx-text-fill: #434343; -fx-border-color: #434343; -fx-border-radius: 20; -fx-background-radius: 20; -fx-border-width: 2;">
+         <font>
+            <Font name="Verdana" size="24.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txt_id" layoutX="742.0" layoutY="134.0" prefHeight="48.0" prefWidth="240.0" style="-fx-background-color: #bcb4b0; -fx-text-fill: #434343; -fx-border-color: #434343; -fx-border-radius: 20; -fx-background-radius: 20; -fx-border-width: 2;">
+         <font>
+            <Font name="Verdana" size="24.0" />
+         </font>
+      </TextField>
+   </children>
+</Pane>
