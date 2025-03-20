@@ -18,6 +18,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 
+import javax.swing.*;
+
 public class ProjectViewController {
 
     ProjectController projectController;
@@ -74,17 +76,17 @@ public class ProjectViewController {
 
     @FXML
     void onAddProject() {
-        //addProject();
+        createProject();
     }
 
     @FXML
     void onUpdateProject() {
-        //updateProject();
+        updateProject();
     }
 
     @FXML
     void onDeleteProject() {
-        //deleteProject();
+        deleteProject();
     }
 
     @FXML
@@ -94,6 +96,48 @@ public class ProjectViewController {
 
     private Project buildProject(){
         return new Project(txt_name.getText(), Integer.parseInt(txt_id.getText()));
+    }
+
+    private void createProject(){
+        if (verifyFilledFields() && verifyValidFields()){
+            if (projectController.createProject(txt_name.getText(), Integer.parseInt(txt_id.getText()))){
+                Project project = projectController.obtainProject(Integer.parseInt(txt_id.getText()));
+                projectsList.add(project);
+                cleanProjectFields();
+                JOptionPane.showMessageDialog(null, "The project has been created successfully", "Message", JOptionPane.PLAIN_MESSAGE);
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "The project hasn't been created successfully", "Message", JOptionPane.PLAIN_MESSAGE);
+            }
+        }
+    }
+
+    private void deleteProject(){
+        if (!txt_id.getText().isEmpty() && isInteger(txt_id.getText())){
+            Project project = projectController.obtainProject(Integer.parseInt(txt_id.getText()));
+            if (projectController.deleteProject(Integer.parseInt(txt_id.getText()))){
+                projectsList.remove(project);
+                cleanProjectFields();
+                JOptionPane.showMessageDialog(null, "The project has been deleted successfully", "Message", JOptionPane.PLAIN_MESSAGE);
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "The project hasn't been deleted successfully", "Message", JOptionPane.PLAIN_MESSAGE);
+            }
+        }
+    }
+
+    private void updateProject(){
+        if (verifyValidFields() && verifyFilledFields()){
+            if (selectedProject != null && projectController.updateProject(selectedProject.getCode(),
+                    txt_name.getText(), Integer.parseInt(txt_id.getText()))){
+                tbl_1.refresh();
+                cleanSelection();
+                JOptionPane.showMessageDialog(null, "The project has been updated successfully", "Message", JOptionPane.PLAIN_MESSAGE);
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "The project hasn't been updated successfully", "Message", JOptionPane.PLAIN_MESSAGE);
+            }
+        }
     }
 
     private boolean verifyFilledFields(){
@@ -140,11 +184,19 @@ public class ProjectViewController {
         obtainProjects();
         tbl_1.getItems().clear();
         tbl_1.setItems(projectsList);
+        listenerSelection();
     }
 
     private void initDataBinding() {
         cl_name.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
         cl_id.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getCode()).asObject());
+    }
+
+    private void listenerSelection(){
+        tbl_1.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            selectedProject = newSelection;
+            showProjectInformation(selectedProject);
+        });
     }
 
     private void cleanSelection(){
@@ -163,6 +215,8 @@ public class ProjectViewController {
 
     @FXML
     void initialize() {
+        projectController = new ProjectController(App.modelFactory);
+        initView();
         assert tbl_1 != null : "fx:id=\"tbl_1\" was not injected: check your FXML file 'projectMenu.fxml'.";
         assert cl_name != null : "fx:id=\"cl_name\" was not injected: check your FXML file 'projectMenu.fxml'.";
         assert txt_id != null : "fx:id=\"txt_id\" was not injected: check your FXML file 'projectMenu.fxml'.";

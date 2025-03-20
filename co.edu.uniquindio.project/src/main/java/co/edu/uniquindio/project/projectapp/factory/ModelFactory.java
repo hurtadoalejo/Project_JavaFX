@@ -1,6 +1,9 @@
 package co.edu.uniquindio.project.projectapp.factory;
 
 import co.edu.uniquindio.project.projectapp.model.Company;
+import co.edu.uniquindio.project.projectapp.model.Project;
+
+import java.util.Collection;
 
 public class ModelFactory {
     private static ModelFactory instance;
@@ -37,5 +40,13 @@ public class ModelFactory {
 
     public boolean updateProject(int oldCode, String name, int code){
         return company.updateProject(oldCode, name, code);
+    }
+
+    public Collection<Project> obtainProjects(){
+        return company.getProjectsList();
+    }
+
+    public Project obtainProject(int code){
+        return company.obtainProject(code);
     }
 }
